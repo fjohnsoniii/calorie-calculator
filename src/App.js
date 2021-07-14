@@ -1,10 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
-import {BMICalculator} from './Components/BMICalculator';
+import {BMRCalculator} from './Components/BMRCalculator';
 
 function App() {
   return (
-    <BMICalculator/>
+    <BMRCalculator/>
   );
 }
 
