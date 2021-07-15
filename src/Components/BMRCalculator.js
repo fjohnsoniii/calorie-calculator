@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 
 export const BMRCalculator = () => {
 
@@ -74,33 +74,33 @@ export const BMRCalculator = () => {
                     <tbody>
                         <tr>
                             <td>Sedentary</td>
-                            <td>{sedentaryCals}</td>
-                            <td>{sedentaryCals - 500}</td>
-                            <td>{sedentaryCals + 250}</td>
+                            <td>{sedentaryCals.toFixed(2)}</td>
+                            <td>{sedentaryCals.toFixed(2) - 500}</td>
+                            <td>{(sedentaryCals + 250).toFixed(2)}</td>
                         </tr>
                         <tr>
                             <td>Lightly Active</td>
-                            <td>{lightlyActiveCals}</td>
-                            <td>{lightlyActiveCals - 500}</td>
-                            <td>{lightlyActiveCals + 250}</td>
+                            <td>{lightlyActiveCals.toFixed(2)}</td>
+                            <td>{lightlyActiveCals.toFixed(2) - 500}</td>
+                            <td>{(lightlyActiveCals + 250).toFixed(2)}</td>
                         </tr>
                         <tr>
                             <td>Moderatley Active</td>
-                            <td>{moderatelyActiveCals}</td>
-                            <td>{moderatelyActiveCals - 500}</td>
-                            <td>{moderatelyActiveCals + 250}</td>
+                            <td>{moderatelyActiveCals.toFixed(2)}</td>
+                            <td>{moderatelyActiveCals.toFixed(2) - 500}</td>
+                            <td>{(moderatelyActiveCals + 250).toFixed(2)}</td>
                         </tr>
                         <tr>
                             <td>Very Active</td>
-                            <td>{veryActiveCals}</td>
-                            <td>{veryActiveCals - 500}</td>
-                            <td>{veryActiveCals + 250}</td>
+                            <td>{veryActiveCals.toFixed(2)}</td>
+                            <td>{veryActiveCals.toFixed(2) - 500}</td>
+                            <td>{(veryActiveCals + 250).toFixed(2)}</td>
                         </tr>
                         <tr>
                             <td>Extremely Active</td>
-                            <td>{extremelyActiveCals}</td>
-                            <td>{extremelyActiveCals - 500}</td>
-                            <td>{extremelyActiveCals + 250}</td>
+                            <td>{extremelyActiveCals.toFixed(2)}</td>
+                            <td>{extremelyActiveCals.toFixed(2) - 500}</td>
+                            <td>{(extremelyActiveCals + 250).toFixed(2)}</td>
                         </tr>
                     </tbody>
                 </table>
