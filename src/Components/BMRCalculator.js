@@ -37,12 +37,12 @@ export const BMRCalculator = () => {
         if (value != "male") {
             state.BMR = femaleBMRFormula;
             {console.log(state)};
-            return <div className="bmr"><h2>BMR (Basal Metabolic Rate): {state.BMR.toFixed(2)} cals.</h2></div>
+            return <div id="bmr"><h2>BMR (Basal Metabolic Rate): {state.BMR.toFixed(2)} cals.</h2></div>
             
         } else {
             state.BMR = maleBMRFormula;
             {console.log(state)};
-            return <div className="bmr"><h2>BMR (Basal Metabolic Rate): {state.BMR.toFixed(2)} cals.</h2></div>
+            return <div id="bmr"><h2>BMR (Basal Metabolic Rate): {state.BMR.toFixed(2)} cals.</h2></div>
         }
     }
 
