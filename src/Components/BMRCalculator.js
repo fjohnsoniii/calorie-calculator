@@ -48,13 +48,15 @@ export const BMRCalculator = () => {
 
     const RenderRadioButtons = () => {
         return (
-            <FormControl component="fieldset">
-                <FormLabel component="legend">Gender</FormLabel>
-                <RadioGroup aria-label="gender" name="gender" value={value} onChange={handleRadioChange}>
-                    <FormControlLabel value="male" control={<Radio/>} label="Male" />
-                    <FormControlLabel value="female" control={<Radio/>} label="Female" />
-                </RadioGroup>
-            </FormControl>
+            <div id="radioContainer">
+                <FormControl component="fieldset">
+                    <RadioGroup  aria-label="gender" name="gender" value={value} onChange={handleRadioChange}>
+                        <FormControlLabel value="male" control={<Radio/>} label="Male" />
+                        <FormControlLabel value="female" control={<Radio/>} label="Female" />
+                    </RadioGroup>
+                </FormControl>
+            </div>
+            
         );
     }
 
@@ -115,7 +117,8 @@ export const BMRCalculator = () => {
 
     return (
         <div className="bmr-calculator-container">
-            <div className="bmr-form-container">
+            <h1>Calorie Calculator</h1>
+            <div id="bmrFormContainer">
                 <RenderRadioButtons/>
                 <form id="bmrForm">
                     <label htmlFor="age">Age: </label>

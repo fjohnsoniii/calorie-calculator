@@ -37,9 +37,23 @@
   }
 }
 
+h1 {
+  text-align: center;
+  font-size: 300%;
+}
+
 #bmr {
   width: 100%;
   text-align: center;
+}
+
+#bmrForm {
+  border: 1px solid black;
+  border-style: outset;
+  text-align: center;
+  width: 50%;
+  padding: 10px;
+  margin: auto;
 }
 
 #calories {
@@ -64,4 +78,19 @@
 
 #calories tr:hover {
   background-color: #ddd;
+}
+
+#calories th {
+  color: white;
+  background-color: black;
+  font-size: large;
+}
+
+#radioContainer {
+  text-align: center;
+  margin: auto;
+}
+
+label {
+  font-weight: bold;
 }
