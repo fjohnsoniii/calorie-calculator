@@ -13,7 +13,7 @@ export const BMRCalculator = () => {
         BMR: 0
     });
 
-    const [activity, setActivity] = useState({
+    const [activity] = useState({
         sedentary: 0,
         light: 0,
         moderate: 0,
@@ -21,15 +21,23 @@ export const BMRCalculator = () => {
         extreme: 0
     }); 
 
-    const [macros, setUserMacros] = useState({
+    const [macros] = useState({
         protein: 0,
-        carbs: 0,
-        fat: 0
+        sedentaryCarbs: 0,
+        lightCarbs: 0,
+        moderateCarbs: 0,
+        veryCarbs: 0,
+        extremeCarbs: 0,
+        sedentaryFat: 0,
+        lightFat: 0,
+        moderateFat: 0,
+        veryFat: 0,
+        extremeFat: 0
     });
 
     const [gender, setGender] = useState("male");
-    const maleBMRFormula = 66 + (6.23 * info.weight) + (12.7 * info.height) - (6.8 * info.age);
-    const femaleBMRFormula = 655 + (4.35 * info.weight) + (4.7 * info.height) - (4.7 * info.age);
+    const maleBMRFormula = 66+(6.23*info.weight)+(12.7*info.height)-(6.8*info.age);
+    const femaleBMRFormula = 655+(4.35*info.weight)+(4.7*info.height)-(4.7*info.age);
 
     const handleInfoChange = (e) => {
         setUserInfo({...info, [e.target.name]: e.target.value});
@@ -42,13 +50,11 @@ export const BMRCalculator = () => {
     const RenderBMR = () => {
         if (gender !== "male") {
             info.BMR = femaleBMRFormula;
-            {console.log(info)};
-            return <div id="bmr"><h2>BMR (Basal Metabolic Rate): {info.BMR.toFixed(2)} cals.</h2></div>
+            return <div id="bmr"><h2>BMR (Basal Metabolic Rate): {info.BMR.toFixed(0)} cals.</h2></div>
             
         } else {
             info.BMR = maleBMRFormula;
-            {console.log(info)};
-            return <div id="bmr"><h2>BMR (Basal Metabolic Rate): {info.BMR.toFixed(2)} cals.</h2></div>
+            return <div id="bmr"><h2>BMR (Basal Metabolic Rate): {info.BMR.toFixed(0)} cals.</h2></div>
         }
     };
 
@@ -56,7 +62,7 @@ export const BMRCalculator = () => {
         return (
             <div id="radioContainer">
                 <FormControl component="fieldset">
-                    <RadioGroup  aria-label="gender" name="gender" value={gender} onChange={handleRadioChange}>
+                    <RadioGroup aria-label="gender" name="gender" value={gender} onChange={handleRadioChange}>
                         <FormControlLabel value="male" control={<Radio/>} label="Male"/>
                         <FormControlLabel value="female" control={<Radio/>} label="Female"/>
                     </RadioGroup>
@@ -66,65 +72,73 @@ export const BMRCalculator = () => {
     };
 
     const setCalories = () => {
-        activity.sedentary = info.BMR * 1.2;
-        activity.light = info.BMR * 1.375;
-        activity.moderate = info.BMR * 1.55;
-        activity.veryActive = info.BMR * 1.7;
-        activity.extreme = info.BMR * 1.9;
+        activity.sedentary = info.BMR*1.2;
+        activity.light = info.BMR*1.375;
+        activity.moderate = info.BMR*1.55;
+        activity.veryActive = info.BMR*1.7;
+        activity.extreme = info.BMR*1.9;
+        console.log(activity);
     };
 
     const setMacros = () => {
-        macros.protein = info.weight * .8;
-        macros.carbs = info.weight * .8;
-        macros.fat = info.weight * .8;
+        macros.protein = (info.weight*.8).toFixed(0);
+        macros.sedentaryCarbs = ((activity.sedentary/2)/4).toFixed(0);
+        macros.lightCarbs = ((activity.light/2)/4).toFixed(0);
+        macros.moderateCarbs = ((activity.moderate/2)/4).toFixed(0);
+        macros.veryCarbs = ((activity.veryActive/2)/4).toFixed(0);
+        macros.extremeCarbs = ((activity.extreme/2)/4).toFixed(0);
+        macros.sedentaryFat = ((activity.sedentary*.3)/9).toFixed(0);
+        macros.lightFat = ((activity.light*.3)/9).toFixed(0);
+        macros.moderateFat = ((activity.moderate*.3)/9).toFixed(0);
+        macros.veryFat = ((activity.veryActive*.3)/9).toFixed(0);
+        macros.extremeFat = ((activity.extreme*.3)/9).toFixed(0);
+        console.log(macros);
     };
 
     const RenderCalorieTable = () => {
         setCalories();
         setMacros();
-        {console.log(activity)};
-        {console.log(macros)};
         return (
             <div className="calorie-table-container">
                 <table id="calories">
                     <thead>
                         <tr>
                             <th>Activity Level</th>
-                            <th>Maintenance Calories</th>
-                            <th>Weight Loss</th>
-                            <th>Weight Gain</th>
+                            <th>Maintain Weight</th>
+                            <th>Lose Weight</th>
+                            <th>Gain Weight</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Sedentary</td>
-                            <td>{activity.sedentary.toFixed(2)} cals.</td>
-                            <td>{(activity.sedentary - 500).toFixed(2)} cals.</td>
-                            <td>{(activity.sedentary + 250).toFixed(2)} cals.</td>
+                            <td><b>Sedentary</b> (little to no exercise)</td>
+                            <td>{activity.sedentary.toFixed(0)} cals.</td>
+                            <td>{(activity.sedentary-500).toFixed(0)} cals.</td>
+                            <td>{(activity.sedentary+250).toFixed(0)} cals.</td>
                         </tr>
                         <tr>
-                            <td>Lightly Active</td>
-                            <td>{activity.light.toFixed(2)} cals.</td>
-                            <td>{(activity.light - 500).toFixed(2)} cals.</td>
-                            <td>{(activity.light + 250).toFixed(2)} cals.</td>
+                            <td><b>Lightly Active</b> (1-3 days a week)</td>
+                            <td>{activity.light.toFixed(0)} cals.</td>
+                            <td>{(activity.light-500).toFixed(0)} cals.</td>
+                            <td>{(activity.light+250).toFixed(0)} cals.</td>
                         </tr>
                         <tr>
-                            <td>Moderatley Active</td>
-                            <td>{activity.moderate.toFixed(2)} cals.</td>
-                            <td>{(activity.moderate - 500).toFixed(2)} cals.</td>
-                            <td>{(activity.moderate + 250).toFixed(2)} cals.</td>
+                            <td><b>Moderatley Active</b> (3-5 days a week)</td>
+                            <td>{activity.moderate.toFixed(0)} cals.</td>
+                            <td>{(activity.moderate-500).toFixed(0)} cals.</td>
+                            <td>{(activity.moderate+250).toFixed(0)} cals.</td>
                         </tr>
                         <tr>
-                            <td>Very Active</td>
-                            <td>{activity.veryActive.toFixed(2)} cals.</td>
-                            <td>{(activity.veryActive - 500).toFixed(2)} cals.</td>
-                            <td>{(activity.veryActive + 250).toFixed(2)} cals.</td>
+                            <td><b>Very Active</b> (6-7 days a week)</td>
+                            <td>{activity.veryActive.toFixed(0)} cals.</td>
+                            <td>{(activity.veryActive-500).toFixed(0)} cals.</td>
+                            <td>{(activity.veryActive+250).toFixed(0)} cals.</td>
                         </tr>
                         <tr>
-                            <td>Extremely Active</td>
-                            <td>{activity.extreme.toFixed(2)} cals.</td>
-                            <td>{(activity.extreme - 500).toFixed(2)} cals.</td>
-                            <td>{(activity.extreme + 250).toFixed(2)} cals.</td>
+                            <td><b>Extremely Active</b> (daily or physical job)</td>
+                            <td>{activity.extreme.toFixed(0)} cals.</td>
+                            <td>{(activity.extreme-500).toFixed(0)} cals.</td>
+                            <td>{(activity.extreme+250).toFixed(0)} cals.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -138,14 +152,14 @@ export const BMRCalculator = () => {
             <div id="bmrFormContainer">
                 <RenderRadioButtons/>
                 <form id="bmrForm">
-                    <label htmlFor="age">Age: </label>
-                    <input type="number" className="age-input" placeholder="Age in years" name="age" onChange={handleInfoChange} required/>
+                    <label htmlFor="age">Age (years): </label>
+                    <input type="number" className="age-input" placeholder="25" name="age" onChange={handleInfoChange} required/>
                     <br></br>
                     <label htmlFor="weight">Weight (lbs.): </label>
-                    <input type="number" className="weight-input" placeholder="Weight in lbs." name="weight" onChange={handleInfoChange} required/> 
+                    <input type="number" className="weight-input" placeholder="230" name="weight" onChange={handleInfoChange} required/> 
                     <br></br>
                     <label htmlFor="height">Height (inches): </label>
-                    <input type="number" className="height-input" placeholder="Height in inches" name="height" onChange={handleInfoChange} required/>
+                    <input type="number" className="height-input" placeholder="72" name="height" onChange={handleInfoChange} required/>
                     <br></br>
                 </form>
             </div>
