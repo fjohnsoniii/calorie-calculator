@@ -13,15 +13,15 @@ export const BMRCalculator = () => {
         BMR: 0
     });
 
-    const [activity] = useState({
+    const activity = {
         sedentary: 0,
         light: 0,
         moderate: 0,
         veryActive: 0,
         extreme: 0
-    }); 
+    }; 
 
-    const [macros] = useState({
+    const macros = {
         protein: 0,
         sedentaryCarbs: 0,
         lightCarbs: 0,
@@ -33,7 +33,33 @@ export const BMRCalculator = () => {
         moderateFat: 0,
         veryFat: 0,
         extremeFat: 0
-    });
+    };
+
+    const weightLossMacros = {
+        sedentaryCarbs: 0,
+        lightCarbs: 0,
+        moderateCarbs: 0,
+        veryCarbs: 0,
+        extremeCarbs: 0,
+        sedentaryFat: 0,
+        lightFat: 0,
+        moderateFat: 0,
+        veryFat: 0,
+        extremeFat: 0
+    };
+
+    const weightGainMacros = {
+        sedentaryCarbs: 0,
+        lightCarbs: 0,
+        moderateCarbs: 0,
+        veryCarbs: 0,
+        extremeCarbs: 0,
+        sedentaryFat: 0,
+        lightFat: 0,
+        moderateFat: 0,
+        veryFat: 0,
+        extremeFat: 0
+    };
 
     const [gender, setGender] = useState("male");
     const maleBMRFormula = 66+(6.23*info.weight)+(12.7*info.height)-(6.8*info.age);
@@ -92,7 +118,27 @@ export const BMRCalculator = () => {
         macros.moderateFat = ((activity.moderate*.3)/9).toFixed(0);
         macros.veryFat = ((activity.veryActive*.3)/9).toFixed(0);
         macros.extremeFat = ((activity.extreme*.3)/9).toFixed(0);
-        console.log(macros);
+        weightLossMacros.sedentaryCarbs = (((activity.sedentary-500)/2)/4).toFixed(0);
+        weightLossMacros.lightCarbs = (((activity.light-500)/2)/4).toFixed(0);
+        weightLossMacros.moderateCarbs = (((activity.moderate-500)/2)/4).toFixed(0);
+        weightLossMacros.veryCarbs = (((activity.veryActive-500)/2)/4).toFixed(0);
+        weightLossMacros.extremeCarbs = (((activity.extreme-500)/2)/4).toFixed(0);
+        weightLossMacros.sedentaryFat = (((activity.sedentary-500)*.3)/9).toFixed(0);
+        weightLossMacros.lightFat = (((activity.light-500)*.3)/9).toFixed(0);
+        weightLossMacros.moderateFat = (((activity.moderate-500)*.3)/9).toFixed(0);
+        weightLossMacros.veryFat = (((activity.veryActive-500)*.3)/9).toFixed(0);
+        weightLossMacros.extremeFat = (((activity.extreme-500)*.3)/9).toFixed(0);
+        weightGainMacros.sedentaryCarbs = (((activity.sedentary+250)/2)/4).toFixed(0);
+        weightGainMacros.lightCarbs = (((activity.light+250)/2)/4).toFixed(0);
+        weightGainMacros.moderateCarbs = (((activity.moderate+250)/2)/4).toFixed(0);
+        weightGainMacros.veryCarbs = (((activity.veryActive+250)/2)/4).toFixed(0);
+        weightGainMacros.extremeCarbs = (((activity.extreme+250)/2)/4).toFixed(0);
+        weightGainMacros.sedentaryFat = (((activity.sedentary+250)*.3)/9).toFixed(0);
+        weightGainMacros.lightFat = (((activity.light+250)*.3)/9).toFixed(0);
+        weightGainMacros.moderateFat = (((activity.moderate+250)*.3)/9).toFixed(0);
+        weightGainMacros.veryFat = (((activity.veryActive+250)*.3)/9).toFixed(0);
+        weightGainMacros.extremeFat = (((activity.extreme+250)*.3)/9).toFixed(0);
+        console.log(weightGainMacros);
     };
 
     const RenderCalorieTable = () => {
