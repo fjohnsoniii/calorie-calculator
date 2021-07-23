@@ -12,14 +12,25 @@ export const BMRCalculator = () => {
         height: 0,
         BMR: 0
     });
-
-    const activity = {
+    
+    const calories = {
+        BMR: 0,
         sedentary: 0,
+        sedentaryLoss: 0,
+        sedentaryGain: 0,
         light: 0,
+        lightLoss: 0,
+        lightGain: 0,
         moderate: 0,
+        moderateLoss: 0,
+        moderateGain: 0,
         veryActive: 0,
-        extreme: 0
-    }; 
+        veryLoss: 0,
+        veryGain: 0,
+        extreme: 0,
+        extremeLoss: 0,
+        extremeGain: 0
+    };
 
     const macros = {
         protein: 0,
@@ -75,12 +86,12 @@ export const BMRCalculator = () => {
 
     const RenderBMR = () => {
         if (gender !== "male") {
-            info.BMR = femaleBMRFormula;
-            return <div id="bmr"><h2>BMR (Basal Metabolic Rate): {info.BMR.toFixed(0)} cals.</h2></div>
+            calories.BMR = femaleBMRFormula;
+            return <div id="bmr"><h2>BMR (Basal Metabolic Rate): {calories.BMR.toFixed(0)} cals.</h2></div>
             
         } else {
-            info.BMR = maleBMRFormula;
-            return <div id="bmr"><h2>BMR (Basal Metabolic Rate): {info.BMR.toFixed(0)} cals.</h2></div>
+            calories.BMR = maleBMRFormula;
+            return <div id="bmr"><h2>BMR (Basal Metabolic Rate): {calories.BMR.toFixed(0)} cals.</h2></div>
         }
     };
 
@@ -98,47 +109,45 @@ export const BMRCalculator = () => {
     };
 
     const setCalories = () => {
-        activity.sedentary = info.BMR*1.2;
-        activity.light = info.BMR*1.375;
-        activity.moderate = info.BMR*1.55;
-        activity.veryActive = info.BMR*1.7;
-        activity.extreme = info.BMR*1.9;
-        console.log(activity);
+        calories.sedentary = calories.BMR*1.2;
+        calories.light = calories.BMR*1.375;
+        calories.moderate = calories.BMR*1.55;
+        calories.veryActive = calories.BMR*1.7;
+        calories.extreme = calories.BMR*1.9;
     };
 
     const setMacros = () => {
-        macros.protein = (info.weight*.8).toFixed(0);
-        macros.sedentaryCarbs = ((activity.sedentary/2)/4).toFixed(0);
-        macros.lightCarbs = ((activity.light/2)/4).toFixed(0);
-        macros.moderateCarbs = ((activity.moderate/2)/4).toFixed(0);
-        macros.veryCarbs = ((activity.veryActive/2)/4).toFixed(0);
-        macros.extremeCarbs = ((activity.extreme/2)/4).toFixed(0);
-        macros.sedentaryFat = ((activity.sedentary*.3)/9).toFixed(0);
-        macros.lightFat = ((activity.light*.3)/9).toFixed(0);
-        macros.moderateFat = ((activity.moderate*.3)/9).toFixed(0);
-        macros.veryFat = ((activity.veryActive*.3)/9).toFixed(0);
-        macros.extremeFat = ((activity.extreme*.3)/9).toFixed(0);
-        weightLossMacros.sedentaryCarbs = (((activity.sedentary-500)/2)/4).toFixed(0);
-        weightLossMacros.lightCarbs = (((activity.light-500)/2)/4).toFixed(0);
-        weightLossMacros.moderateCarbs = (((activity.moderate-500)/2)/4).toFixed(0);
-        weightLossMacros.veryCarbs = (((activity.veryActive-500)/2)/4).toFixed(0);
-        weightLossMacros.extremeCarbs = (((activity.extreme-500)/2)/4).toFixed(0);
-        weightLossMacros.sedentaryFat = (((activity.sedentary-500)*.3)/9).toFixed(0);
-        weightLossMacros.lightFat = (((activity.light-500)*.3)/9).toFixed(0);
-        weightLossMacros.moderateFat = (((activity.moderate-500)*.3)/9).toFixed(0);
-        weightLossMacros.veryFat = (((activity.veryActive-500)*.3)/9).toFixed(0);
-        weightLossMacros.extremeFat = (((activity.extreme-500)*.3)/9).toFixed(0);
-        weightGainMacros.sedentaryCarbs = (((activity.sedentary+250)/2)/4).toFixed(0);
-        weightGainMacros.lightCarbs = (((activity.light+250)/2)/4).toFixed(0);
-        weightGainMacros.moderateCarbs = (((activity.moderate+250)/2)/4).toFixed(0);
-        weightGainMacros.veryCarbs = (((activity.veryActive+250)/2)/4).toFixed(0);
-        weightGainMacros.extremeCarbs = (((activity.extreme+250)/2)/4).toFixed(0);
-        weightGainMacros.sedentaryFat = (((activity.sedentary+250)*.3)/9).toFixed(0);
-        weightGainMacros.lightFat = (((activity.light+250)*.3)/9).toFixed(0);
-        weightGainMacros.moderateFat = (((activity.moderate+250)*.3)/9).toFixed(0);
-        weightGainMacros.veryFat = (((activity.veryActive+250)*.3)/9).toFixed(0);
-        weightGainMacros.extremeFat = (((activity.extreme+250)*.3)/9).toFixed(0);
-        console.log(weightGainMacros);
+        macros.protein = (calories.weight*.8).toFixed(0);
+        macros.sedentaryCarbs = ((calories.sedentary/2)/4).toFixed(0);
+        macros.lightCarbs = ((calories.light/2)/4).toFixed(0);
+        macros.moderateCarbs = ((calories.moderate/2)/4).toFixed(0);
+        macros.veryCarbs = ((calories.veryActive/2)/4).toFixed(0);
+        macros.extremeCarbs = ((calories.extreme/2)/4).toFixed(0);
+        macros.sedentaryFat = ((calories.sedentary*.3)/9).toFixed(0);
+        macros.lightFat = ((calories.light*.3)/9).toFixed(0);
+        macros.moderateFat = ((calories.moderate*.3)/9).toFixed(0);
+        macros.veryFat = ((calories.veryActive*.3)/9).toFixed(0);
+        macros.extremeFat = ((calories.extreme*.3)/9).toFixed(0);
+        weightLossMacros.sedentaryCarbs = (((calories.sedentary-500)/2)/4).toFixed(0);
+        weightLossMacros.lightCarbs = (((calories.light-500)/2)/4).toFixed(0);
+        weightLossMacros.moderateCarbs = (((calories.moderate-500)/2)/4).toFixed(0);
+        weightLossMacros.veryCarbs = (((calories.veryActive-500)/2)/4).toFixed(0);
+        weightLossMacros.extremeCarbs = (((calories.extreme-500)/2)/4).toFixed(0);
+        weightLossMacros.sedentaryFat = (((calories.sedentary-500)*.3)/9).toFixed(0);
+        weightLossMacros.lightFat = (((calories.light-500)*.3)/9).toFixed(0);
+        weightLossMacros.moderateFat = (((calories.moderate-500)*.3)/9).toFixed(0);
+        weightLossMacros.veryFat = (((calories.veryActive-500)*.3)/9).toFixed(0);
+        weightLossMacros.extremeFat = (((calories.extreme-500)*.3)/9).toFixed(0);
+        weightGainMacros.sedentaryCarbs = (((calories.sedentary+250)/2)/4).toFixed(0);
+        weightGainMacros.lightCarbs = (((calories.light+250)/2)/4).toFixed(0);
+        weightGainMacros.moderateCarbs = (((calories.moderate+250)/2)/4).toFixed(0);
+        weightGainMacros.veryCarbs = (((calories.veryActive+250)/2)/4).toFixed(0);
+        weightGainMacros.extremeCarbs = (((calories.extreme+250)/2)/4).toFixed(0);
+        weightGainMacros.sedentaryFat = (((calories.sedentary+250)*.3)/9).toFixed(0);
+        weightGainMacros.lightFat = (((calories.light+250)*.3)/9).toFixed(0);
+        weightGainMacros.moderateFat = (((calories.moderate+250)*.3)/9).toFixed(0);
+        weightGainMacros.veryFat = (((calories.veryActive+250)*.3)/9).toFixed(0);
+        weightGainMacros.extremeFat = (((calories.extreme+250)*.3)/9).toFixed(0);
     };
 
     const RenderCalorieTable = () => {
@@ -158,33 +167,33 @@ export const BMRCalculator = () => {
                     <tbody>
                         <tr>
                             <td><b>Sedentary</b> (little to no exercise)</td>
-                            <td>{activity.sedentary.toFixed(0)} cals.</td>
-                            <td>{(activity.sedentary-500).toFixed(0)} cals.</td>
-                            <td>{(activity.sedentary+250).toFixed(0)} cals.</td>
+                            <td>{calories.sedentary.toFixed(0)} cals.</td>
+                            <td>{(calories.sedentary-500).toFixed(0)} cals.</td>
+                            <td>{(calories.sedentary+250).toFixed(0)} cals.</td>
                         </tr>
                         <tr>
                             <td><b>Lightly Active</b> (1-3 days a week)</td>
-                            <td>{activity.light.toFixed(0)} cals.</td>
-                            <td>{(activity.light-500).toFixed(0)} cals.</td>
-                            <td>{(activity.light+250).toFixed(0)} cals.</td>
+                            <td>{calories.light.toFixed(0)} cals.</td>
+                            <td>{(calories.light-500).toFixed(0)} cals.</td>
+                            <td>{(calories.light+250).toFixed(0)} cals.</td>
                         </tr>
                         <tr>
                             <td><b>Moderatley Active</b> (3-5 days a week)</td>
-                            <td>{activity.moderate.toFixed(0)} cals.</td>
-                            <td>{(activity.moderate-500).toFixed(0)} cals.</td>
-                            <td>{(activity.moderate+250).toFixed(0)} cals.</td>
+                            <td>{calories.moderate.toFixed(0)} cals.</td>
+                            <td>{(calories.moderate-500).toFixed(0)} cals.</td>
+                            <td>{(calories.moderate+250).toFixed(0)} cals.</td>
                         </tr>
                         <tr>
                             <td><b>Very Active</b> (6-7 days a week)</td>
-                            <td>{activity.veryActive.toFixed(0)} cals.</td>
-                            <td>{(activity.veryActive-500).toFixed(0)} cals.</td>
-                            <td>{(activity.veryActive+250).toFixed(0)} cals.</td>
+                            <td>{calories.veryActive.toFixed(0)} cals.</td>
+                            <td>{(calories.veryActive-500).toFixed(0)} cals.</td>
+                            <td>{(calories.veryActive+250).toFixed(0)} cals.</td>
                         </tr>
                         <tr>
                             <td><b>Extremely Active</b> (daily or physical job)</td>
-                            <td>{activity.extreme.toFixed(0)} cals.</td>
-                            <td>{(activity.extreme-500).toFixed(0)} cals.</td>
-                            <td>{(activity.extreme+250).toFixed(0)} cals.</td>
+                            <td>{calories.extreme.toFixed(0)} cals.</td>
+                            <td>{(calories.extreme-500).toFixed(0)} cals.</td>
+                            <td>{(calories.extreme+250).toFixed(0)} cals.</td>
                         </tr>
                     </tbody>
                 </table>
